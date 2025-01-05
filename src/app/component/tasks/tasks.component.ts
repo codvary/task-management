@@ -1,15 +1,13 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { type Tasks } from '../../template/tasks.template';
 import { type User } from '../../template/users.template';
-import { TaskComponent } from './task/task.component';
 import { TASKS } from '../../model/tasks.model';
-import { NewTaskComponent } from './new-task/new-task.component';
-import { NewTask } from '../../template/new-task.template';
+import { TaskService } from '../../service/task.service';
 
 
 @Component({
   selector: 'app-tasks',
-  imports: [TaskComponent, NewTaskComponent],
+  standalone: false,
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -19,13 +17,11 @@ export class TasksComponent {
   tsks: Tasks[] = TASKS;
   isAddingTask: boolean = false;
 
+  constructor(private taskService: TaskService){}
+
 
   get selectedUserTask(): Tasks[] {
-    return this.tsks.filter((tsk) => tsk.uid === this.selected().uid)!;
-  }
-
-  handleOnTaskCompleted(task: Tasks) {
-    this.tsks = this.tsks.filter((tsk) => tsk.tid !== task.tid);
+    return this.taskService.getSelectedTask(this.selected().uid);
   }
 
   onCloseAddTask() {
@@ -36,13 +32,4 @@ export class TasksComponent {
     this.isAddingTask = true;
   }
 
-  onAddNewTask(newTask: NewTask){
-    this.tsks.push({
-      uid:this.selected().uid,
-      tid: new Date().getTime().toString(),
-      title:newTask.title,
-      task:newTask.summary,
-      date:newTask.date
-    });
-  }
 }

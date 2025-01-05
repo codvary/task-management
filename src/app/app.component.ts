@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './component/header/header.component';
-import { UsersComponent } from "./component/users/users.component";
-import { USERS } from './model/users.model';
-import { TasksComponent } from "./component/tasks/tasks.component";
 import { type User } from './template/users.template';
 import { TASKS } from './model/tasks.model';
-import { FooterComponent } from "./component/footer/footer.component";
+import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, UsersComponent, TasksComponent, FooterComponent],
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'codvary-blog';
   selected?:User; 
-  usrs = USERS;
+  users?: User[];
   tsks = TASKS;
+
+  constructor(private userSerivce: UserService){
+    this.users = userSerivce.listUsers();
+  }
 
   handleOnSelectedUser(user: User){
     this.selected = user;

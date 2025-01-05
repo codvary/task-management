@@ -72,3 +72,28 @@ app-footer{
     text-align: center;
     align-content: center;
 }
+
+@media(width < 1000px){
+    app-header{
+        grid-column: 1 / 13;
+        grid-row: 1 / 2;
+        font-size: smaller;
+    }
+
+    aside{
+        grid-column: 1 / 13;
+        grid-row: 2 / 5;
+
+        overflow-y: auto;
+    }
+
+    app-tasks{
+        grid-column: 1 / 13;
+        grid-row: 5 / 12;
+    }
+
+    app-footer{
+        grid-column: 1 / 13;
+        grid-row: 12 / 13;
+    }
+}
