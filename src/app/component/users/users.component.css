@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button{
+    height: 100%;
+    width: 100%;
+}
+
+button:hover, .active{
+    color: white;
+    background-image: linear-gradient(to bottom right, #ad026c, #540566, #c21518);
+}

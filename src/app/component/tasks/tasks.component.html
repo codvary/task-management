@@ -1,0 +1,21 @@
+@if(isAddingTask){
+    <app-new-task (close)="onCloseAddTask()" (add)="onAddNewTask($event)"/>
+}
+<section>
+    <header>
+        <h1>{{selected().name}}'s Task List</h1>
+        <menu>
+            <button (click)="openAddTask()">Add Task</button>
+        </menu>
+    </header>
+    @if(selectedUserTask.length > 0){
+        <ul>
+            @for (task of selectedUserTask; track task.tid) {
+                <app-task [task]="task" (completed)="handleOnTaskCompleted($event)"/>
+                <br>
+            }
+        </ul>
+    }@else {
+        <p>No task available...</p>
+    }
+</section>

@@ -1,0 +1,19 @@
+<app-header />
+
+<aside>
+    <ul>
+        @for (usr of usrs; track usr.uid) {
+        <li>
+            <app-users [usr]="usr" [isSelected]="usr.uid === selected?.uid" (selected)="handleOnSelectedUser($event)"/>
+        </li>
+        }
+    </ul>
+</aside>
+
+@if(selectedUser){
+    <app-tasks [selected]="selectedUser"/>
+}@else {
+    <p id="fallback">Select a user to see the task...</p>
+}
+
+<app-footer/>

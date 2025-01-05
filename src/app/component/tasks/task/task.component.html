@@ -1,0 +1,9 @@
+<article>
+    <h2>{{task().title}}</h2>
+    <time>{{task().date | date:'short'}}</time>
+    <p>{{task().task}}</p>
+    <p>
+        <button (click)="onTaskComplete()">Completed</button>
+    </p>
+</article>
+
