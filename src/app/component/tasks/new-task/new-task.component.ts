@@ -1,10 +1,10 @@
-import { Component, output, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NewTask } from '../../../template/new-task.template';
+import { Component, input, output, signal } from '@angular/core';
+import { User } from '../../../template/users.template';
+import { TaskService } from '../../../service/task.service';
 
 @Component({
   selector: 'app-new-task',
-  imports: [FormsModule],
+  standalone: false,
   templateUrl: './new-task.component.html',
   styleUrl: './new-task.component.css'
 })
@@ -14,19 +14,21 @@ export class NewTaskComponent {
   esummary = signal('');
   edate = signal('');
 
+  user = input.required<User>();
   close = output<void>();
-  add = output<NewTask>();
 
-  onCancel(){
+  constructor(private taskService: TaskService) { }
+
+  onCancel() {
     this.close.emit();
   }
 
-  onSubmit(){
-     this.add.emit({
-       title:this.etitle(),
-       summary: this.esummary(),
-       date:this.edate()
-     });
-     this.close.emit();
+  onSubmit() {
+    this.taskService.addNewTask({
+      title: this.etitle(),
+      summary: this.esummary(),
+      date: this.edate()
+    }, this.user());
+    this.close.emit();
   }
 }

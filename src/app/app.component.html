@@ -2,9 +2,9 @@
 
 <aside>
     <ul>
-        @for (usr of usrs; track usr.uid) {
+        @for (user of users; track user.uid) {
         <li>
-            <app-users [usr]="usr" [isSelected]="usr.uid === selected?.uid" (selected)="handleOnSelectedUser($event)"/>
+            <app-users [usr]="user" [isSelected]="user.uid === selected?.uid" (selected)="handleOnSelectedUser($event)"/>
         </li>
         }
     </ul>

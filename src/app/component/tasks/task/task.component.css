@@ -40,3 +40,9 @@ button:hover{
     background-image: linear-gradient(to bottom right, #ad026c, #540566, #c21518);
     color: white;
 }
+
+@media(width < 1000px){
+    button{
+        width: 100%;
+    }
+}

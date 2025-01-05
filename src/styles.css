@@ -26,3 +26,10 @@ app-root{
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
 }
+
+@media(width < 1000px){
+    app-root{
+        grid-gap: 0.5rem;
+    }
+}
+   

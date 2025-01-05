@@ -1,19 +1,20 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { type Tasks } from '../../../template/tasks.template';
-import { DatePipe } from '@angular/common';
+import { TaskService } from '../../../service/task.service';
 
 @Component({
   selector: 'app-task',
-  imports: [DatePipe],
+  standalone: false,
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
 
   task = input.required<Tasks>();
-  completed = output<Tasks>();
+
+  constructor(private taskService: TaskService){}
 
   onTaskComplete(){
-    this.completed.emit(this.task());
+    this.taskService.removeSelectedTask(this.task().tid);
   }
 }
